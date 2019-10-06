@@ -20,8 +20,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'CONN_MAX_AGE': 14400,
-        'NAME': 'emu_master',
-        'USER': 'emu_master_user',
+        'NAME': 'news',
+        'USER': 'news_user',
         'PASSWORD': '123456',
         'HOST': MYSQL_HOST,
         'PORT': MYSQL_PORT,
