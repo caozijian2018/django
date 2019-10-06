@@ -1,0 +1,48 @@
+# https://docs.docker.com/compose/compose-file/
+version: '3.7'
+networks:
+  app-tier:
+    driver: bridge
+volumes:
+  share_data: {}
+
+services:
+  testbird_admin:
+    image:  caocaocao/django_1_11_22
+    container_name: "template1"
+    depends_on:
+      - mariadb
+      # - testbird_admin_init
+    volumes:
+      - "./logs/django_log:/app/django/logs"
+      - "./uwsgi.prod.ini:/app/django/config/uwsgi.prod.ini"
+      - "./share/:/app/django/assets/"
+    
+    ulimits:
+      nproc: 409600
+      nofile:
+        soft: 409600  #文件句柄数为 20000（软限制，应用可以随时修改，不能超过硬限制）
+        hard: 409600  #文件句柄数为 40000（系统硬限制，只能 root 用户提高）
+    sysctls:
+      net.core.somaxconn: 65535
+
+    working_dir: "/app/django"
+    environment:
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT=7777
+    # ports:
+    #   - "18005:8080"
+    networks:
+      - app-tier
+    command: 
+      - /bin/sh
+      - -c
+      - |
+        # tail -f /dev/null
+        uwsgi --ini /app/django/config/uwsgi.prod.ini
+        # python3 src/manage.py migrate
+        # python3 src/manage.py runserver 0.0.0.0:8000 --settings=settings.local
+        # python3 src/manage.py migrate && python3 src/manage.py runserver 0.0.0.0:8000 --settings=settings.local
+      
+
+  
