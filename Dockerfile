@@ -16,8 +16,7 @@ ENV PYTHONIOENCODING UTF-8
 RUN pip3 install --no-cache-dir  -r /app/django/requirements.txt  \
   && mkdir -p /app/django/assets/img \
   && rm -rf /cache/* \
-  && rm -rf /root/.cache/* \
-  && python3 /app/django/src/manage.py collectstatic --noinput --settings=settings.local
+  && rm -rf /root/.cache/*
   # && rm /site_api/requirements.txt
 #CMD "python manage.py runserver 0.0.0.0:8000"
 # CMD "python3 -V"
