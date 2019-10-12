@@ -57,8 +57,9 @@ class ImgsView(APIView):
             try:
                 Imgs.objects.create(package=excel_relative_path,name=name)
                 return Response({"msg": "ok"}, status=status.HTTP_201_CREATED)
-            except:
-                return Response({"msg": "fail"}, status=status.HTTP_400_BAD_REQUEST)
+            except Exception as e:
+                logger.info(str(e))
+                return Response({"msg": "fail", "ww": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 
 # class AppViewSet(CreateModelMixin, ListModelMixin, UpdateModelMixin, RetrieveModelMixin, viewsets.GenericViewSet,
