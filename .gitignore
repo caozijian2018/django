@@ -3,3 +3,4 @@
 /assets
 /logs
 /static_file
+__pycache__/
