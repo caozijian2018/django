@@ -35,6 +35,11 @@ class NewsViewSet(CreateModelMixin, ListModelMixin, UpdateModelMixin, RetrieveMo
     pagination_class = CustomPageNumberPagination
     serializer_class = NewsSerializer
 
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        self.perform_destroy(instance)
+        return Response(status=status.HTTP_204_NO_CONTENT, {"msg": "ok"})
+
 
 class ImgsView(APIView):
     # permission_classes = (IsAuthenticated,)
