@@ -5,14 +5,10 @@ from apps.task.country import Country
 
 
 class Imgs(models.Model):
-    # APP_PLATFORM = {
-    #     (0, 'Android'),
-    #     (1, 'IOS')
-    # }
-    # platform = models.IntegerField(default=1, choices=APP_PLATFORM, verbose_name='app类型', help_text='app类型')
     name = models.CharField(max_length=20, verbose_name="图片名字", help_text="图片名字")
     package = models.CharField(max_length=100, verbose_name="图片下载地址", help_text="图片下载地址")
-
+    create_time = models.DateTimeField(auto_now_add=True, verbose_name="图片创建时间", help_text='图片创建时间')
+    update_time = models.DateTimeField(auto_now=True, verbose_name="图片修改时间", help_text='图片修改时间')
     class Meta:
         verbose_name = u'App'
         verbose_name_plural = verbose_name
