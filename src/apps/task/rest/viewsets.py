@@ -49,7 +49,7 @@ class ImgsView(APIView):
         
         page = request.GET.get('page', 1)
         capacity = request.GET.get('capacity', 12)
-        arr = Imgs.objects.filter()
+        arr = Imgs.objects.all().order_by("-create_time")
         page_obj = CustomPageNumberPagination()
         page_article = page_obj.paginate_queryset(queryset=arr, request=request, view=self)
         serializer = ImgsListSerializer(page_article, many=True)
