@@ -38,7 +38,7 @@ class NewsViewSet(CreateModelMixin, ListModelMixin, UpdateModelMixin, RetrieveMo
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
         self.perform_destroy(instance)
-        return Response(status=status.HTTP_204_NO_CONTENT, data={"msg": "ok"})
+        return Response({status=status.HTTP_204_NO_CONTENT, {"msg": "ok"}})
 
 
 class ImgsView(APIView):
