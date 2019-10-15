@@ -23,7 +23,7 @@ logger = logging.getLogger('__name__')
 
 
 class NewsViewSet(CreateModelMixin, ListModelMixin, UpdateModelMixin, RetrieveModelMixin, viewsets.GenericViewSet,
-                  LoadsJsonStr):
+                  LoadsJsonStr, DestroyModelMixin):
     
 
     # permission_classes = (IsAuthenticated,)
