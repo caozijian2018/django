@@ -53,7 +53,7 @@ class ImgsView(APIView):
         page_obj = CustomPageNumberPagination()
         page_article = page_obj.paginate_queryset(queryset=arr, request=request, view=self)
         serializer = ImgsListSerializer(page_article, many=True)
-        return Response({"imgs": serializer.data, "count": len(serializer.data)}, status=status.HTTP_201_CREATED)
+        return Response({"imgs": serializer.data, "count": len(arr)}, status=status.HTTP_201_CREATED)
 
     def post(self, request, *args, **kwargs):
         # /site_api/assets/img/ff100202db8811e9a5700242ac1c0003.jpg
