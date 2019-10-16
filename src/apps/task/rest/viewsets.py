@@ -29,7 +29,7 @@ class NewsViewSet(CreateModelMixin, ListModelMixin, UpdateModelMixin, RetrieveMo
     # permission_classes = (IsAuthenticated,)
     # authentication_classes = (JSONWebTokenAuthentication, SessionAuthentication)
 
-    queryset = News.objects.all().order_by('-create_time')
+    queryset = News.objects.all().order_by('-update_time')
     permission_classes = ()
     authentication_classes = ()
     pagination_class = CustomPageNumberPagination
