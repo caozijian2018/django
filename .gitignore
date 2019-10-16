@@ -4,3 +4,4 @@
 /logs
 /static_file
 __pycache__/
+.DS_Store
