@@ -46,6 +46,13 @@ class NewsViewSet(CreateModelMixin, ListModelMixin, UpdateModelMixin, RetrieveMo
         self.perform_destroy(instance)
         return Response({"msg": "ok"}, status=status.HTTP_201_CREATED)
 
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance = instance.readed_number + 1
+        instance.save()
+        serializer = self.get_serializer(instance)
+
+        return Response(serializer.data)
 
 class ImgsView(APIView):
     # permission_classes = (IsAuthenticated,)
