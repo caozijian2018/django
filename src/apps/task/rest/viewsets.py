@@ -48,10 +48,9 @@ class NewsViewSet(CreateModelMixin, ListModelMixin, UpdateModelMixin, RetrieveMo
 
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
-        instance = instance.readed_number + 1
+        instance.readed_number = instance.readed_number + 1
         instance.save()
         serializer = self.get_serializer(instance)
-
         return Response(serializer.data)
 
 class ImgsView(APIView):
