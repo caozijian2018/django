@@ -30,6 +30,12 @@ class NewsSerializer(serializers.ModelSerializer):
         exclude = ("create_time", "update_time")
 
 
+
+class NewsListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = News
+        fields = "__all__"
+
 class ImgsListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Imgs

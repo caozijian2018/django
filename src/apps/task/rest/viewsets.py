@@ -14,7 +14,7 @@ from rest_framework.authentication import SessionAuthentication
 
 from apps.task.country import Country
 from apps.task.models import Imgs, News
-from apps.task.rest.serializers import CountrySerializer, NewsSerializer, ImgsListSerializer, ImgsCreateOrUpdateSerializer
+from apps.task.rest.serializers import CountrySerializer, NewsSerializer,  NewsListSerializer, ImgsListSerializer, ImgsCreateOrUpdateSerializer
 from apps.utils.utils import CustomPageNumberPagination, LoadsJsonStr, get_file_name, save_file, rename_file
 from django.conf import settings
 import logging
@@ -34,6 +34,12 @@ class NewsViewSet(CreateModelMixin, ListModelMixin, UpdateModelMixin, RetrieveMo
     authentication_classes = ()
     pagination_class = CustomPageNumberPagination
     serializer_class = NewsSerializer
+
+    def get_serializer_class(self):
+        if self.action == 'update' or self.action == 'create':
+            return NewsSerializer
+        else:
+            return NewsListSerializer 
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
